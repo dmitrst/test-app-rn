@@ -1,7 +1,7 @@
 import React from 'react';
 import { RefreshControl, SafeAreaView, ScrollView, Platform } from "react-native";
 
-const ForceReload = ({ isRefreshing, onRefresh, children }) => console.log(Platform.is) || (
+const ForceReload = ({ isRefreshing, onRefresh, children }) => (
     <ScrollView
         style={ { backgroundColor: 'white', height: '100%' } }
         refreshControl={
