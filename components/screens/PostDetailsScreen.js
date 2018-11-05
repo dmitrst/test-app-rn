@@ -3,7 +3,7 @@ import React from 'react';
 import ForceReload from '../ui/ForceReload';
 import withRouteParams from '../hoc/withRouteParams';
 
-import { ContentSpacing, SubTitle, TextWrapper, PostImage } from '../styled';
+import { ContentSpacing, TextWrapper, PostImage, Title } from '../styled';
 
 const PostDetailsScreen = ({ post, onRefresh, isRefreshing }) => (
     <ForceReload
@@ -11,7 +11,7 @@ const PostDetailsScreen = ({ post, onRefresh, isRefreshing }) => (
         isRefreshing={ isRefreshing }
     >
         <ContentSpacing>
-            <SubTitle>{ post.subtitle }</SubTitle>
+            <Title>{ post.name }</Title>
             <PostImage source={ { uri: post.image } }/>
             <TextWrapper>{ post.content }</TextWrapper>
         </ContentSpacing>

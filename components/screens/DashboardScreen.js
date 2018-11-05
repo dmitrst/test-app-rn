@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, View } from 'react-native';
+import { View } from 'react-native';
 import { Text, Spinner } from 'native-base';
 
 import ForceReload from '../ui/ForceReload';
+import styled from 'styled-components';
 
 import UserCard from '../ui/UserCard';
 import TaskCard from '../ui/TaskCard';
@@ -12,7 +13,13 @@ import PostCard from '../ui/PostCard';
 import { fetchTasks } from '../../store/tasks/actions';
 import { fetchPosts } from '../../store/posts/actions';
 
-import { Title } from '../styled';
+import { ContentSpacing } from '../styled';
+
+export const ScrollContentWrapper = styled.ScrollView`
+  margin-left: 14;
+  margin-top: 25;
+  margin-bottom: 35;
+`;
 
 class DashboardScreen extends React.Component {
 
@@ -52,42 +59,46 @@ class DashboardScreen extends React.Component {
                 onRefresh={ this.onRefresh }
                 isRefreshing={ tasks.isFetching && posts.isFetching }
             >
-                    <UserCard { ...user }/>
+                <UserCard { ...user }/>
 
-                    { tasks.isFetching && posts.isFetching && !this.state.isForceReload ? <Spinner/> :
-                        <React.Fragment>
-                            { tasks.items.length ?
-                                <View>
-                                    <Title>
+                { tasks.isFetching && posts.isFetching && !this.state.isForceReload ? <Spinner/> :
+                    <React.Fragment>
+                        { tasks.items.length ?
+                            <View>
+                                <ContentSpacing>
+                                    <Text>
                                         You have { tasks.items.length } requests to catch up on today.
-                                    </Title>
-                                    <ScrollView horizontal={ true }>
-                                        { tasks.items.length && tasks.items.map(task => <TaskCard
-                                            key={ task.id } task={ task }
-                                            onSelect={ this.openDetails }/>)
-                                        }
-                                    </ScrollView>
-                                </View> :
-                                <View>
-                                    <Text>You have no available tasks.</Text>
-                                </View>
-                            }
+                                    </Text>
+                                </ContentSpacing>
+                                <ScrollContentWrapper horizontal={ true }>
+                                    { tasks.items.length && tasks.items.map(task => <TaskCard
+                                        key={ task.id } task={ task }
+                                        onSelect={ this.openDetails }/>)
+                                    }
+                                </ScrollContentWrapper>
+                            </View> :
+                            <ContentSpacing>
+                                <Text>You have no available tasks.</Text>
+                            </ContentSpacing>
+                        }
 
-                            { posts.items.length ?
-                                <View>
-                                    <Title>
+                        { posts.items.length ?
+                            <View>
+                                <ContentSpacing>
+                                    <Text>
                                         Here are some blog posts you may like to read.
-                                    </Title>
-                                    <ScrollView horizontal={ true }>
-                                        { posts.items.map(post => <PostCard
-                                            key={ post.id } post={ post }
-                                            onSelect={ this.openDetails }/>) }
-                                    </ScrollView>
-                                </View> :
-                                <View><Text>There are no posts.</Text></View>
-                            }
-                        </React.Fragment>
-                    }
+                                    </Text>
+                                </ContentSpacing>
+                                <ScrollContentWrapper horizontal={ true }>
+                                    { posts.items.map(post => <PostCard
+                                        key={ post.id } post={ post }
+                                        onSelect={ this.openDetails }/>) }
+                                </ScrollContentWrapper>
+                            </View> :
+                            <View><Text>There are no posts.</Text></View>
+                        }
+                    </React.Fragment>
+                }
             </ForceReload>
         );
     }

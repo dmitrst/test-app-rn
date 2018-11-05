@@ -25,7 +25,7 @@ class AppLoadingScreen extends React.Component {
     componentWillReceiveProps(nextProps) {
         const { user, navigation } = nextProps;
         if ( !user.isFetching && user.id ) {
-            navigation.navigate('AppDashboard');
+            navigation.navigate('UserDashboard', { user });
         }
     }
 

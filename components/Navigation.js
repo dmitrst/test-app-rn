@@ -6,23 +6,44 @@ import DashboardScreen from './screens/DashboardScreen';
 import TaskDetailsScreen from './screens/TaskDetailsScreen';
 import PostDetailsScreen from './screens/PostDetailsScreen';
 
+import { brandedPurpleColor } from './styled';
+
+// Default header on stack navigator
+const defaultHeaderStyle = {
+    headerStyle: {
+        backgroundColor: brandedPurpleColor
+    },
+    headerTitleStyle: {
+        color: 'white'
+    },
+    headerBackTitleStyle: {
+        color: 'white'
+    },
+    headerTintColor: 'white'
+};
+
 const DashboardNavigator = createStackNavigator({
     UserDashboard: {
         screen: DashboardScreen,
         navigationOptions: ({ navigation }) => ({
-            header: null
+            ...defaultHeaderStyle,
+            headerBackTitleVisible: false,
+            headerTitle: navigation.state.params.user.last_name,
+            headerBackTitle: 'Back'
         })
     },
     TaskDetails: {
         screen: TaskDetailsScreen,
         navigationOptions: ({ navigation }) => ({
-            title: navigation.state.params.task.name
+            ...defaultHeaderStyle,
+            title: navigation.state.params.task.subtitle
         })
     },
     PostDetails: {
         screen: PostDetailsScreen,
         navigationOptions: ({ navigation }) => ({
-            title: navigation.state.params.post.name
+            ...defaultHeaderStyle,
+            title: navigation.state.params.post.subtitle
         })
     }
 });

@@ -4,7 +4,7 @@ import Tags from '../ui/Tags';
 import withRouteParams from '../hoc/withRouteParams';
 import ForceReload from "../ui/ForceReload";
 
-import { ContentSpacing, SubTitle, TextWrapper } from '../styled';
+import { ContentSpacing, TextWrapper, Title } from '../styled';
 
 const TaskDetailsScreen = ({ task, onRefresh, isRefreshing }) => (
     <ForceReload
@@ -12,7 +12,7 @@ const TaskDetailsScreen = ({ task, onRefresh, isRefreshing }) => (
         isRefreshing={ isRefreshing }
     >
         <ContentSpacing>
-            <SubTitle>{ task.subtitle }</SubTitle>
+            <Title>{ task.name }</Title>
             <Tags style={ { flexDirection: 'row' } } tags={ task.tags }/>
             <TextWrapper>{ task.description }</TextWrapper>
         </ContentSpacing>

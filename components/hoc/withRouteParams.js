@@ -6,5 +6,4 @@ const withRouteParams = Component =>
         return <Component { ...params } { ...props } />;
     };
 
-
 export default withRouteParams;
